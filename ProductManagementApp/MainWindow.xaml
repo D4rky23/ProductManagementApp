@@ -5,103 +5,127 @@
         Title="Product Management"
         WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip"
         Background="#F4F4F9"
-        SizeToContent="WidthAndHeight" MinHeight="400" MinWidth="800">
+        MinHeight="600" MinWidth="1000">
 
     <Window.DataContext>
         <viewModels:ProductViewModel/>
     </Window.DataContext>
 
-    <!-- Resursele stilurilor pentru butoane, logout și DataGrid -->
+    <!-- Resursele pentru stiluri -->
     <Window.Resources>
-        <!-- Modern Button Style -->
-        <Style x:Key="ModernButtonStyle" TargetType="Button">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="15,10"/>
-            <Setter Property="Background" Value="#16A085"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Cursor" Value="Hand"/>
+        <!-- Stiluri modernizate pentru DataGrid -->
+        <Style x:Key="ModernDataGridCellStyle" TargetType="DataGridCell">
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
             <Style.Triggers>
-                <EventTrigger RoutedEvent="Button.MouseEnter">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation To="#1ABC9C" Duration="0:0:0.3" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="Button.MouseLeave">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation To="#16A085" Duration="0:0:0.3" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#D5F5E3"/>
+                </Trigger>
             </Style.Triggers>
         </Style>
 
-        <!-- Custom Style for Logout Button -->
-        <Style x:Key="LogoutButtonStyle" TargetType="Button">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="15,10"/>
-            <Setter Property="Background" Value="#E74C3C"/>
+        <Style x:Key="ModernDataGridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="#16A085"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
         </Style>
 
-        <!-- Modern DataGrid Style -->
-        <Style x:Key="DataGridStyle" TargetType="DataGrid">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="RowHeight" Value="40"/>
+        <!-- Stil pentru DataGrid -->
+        <Style x:Key="ModernDataGridStyle" TargetType="DataGrid">
+            <Setter Property="CellStyle" Value="{StaticResource ModernDataGridCellStyle}"/>
+            <Setter Property="ColumnHeaderStyle" Value="{StaticResource ModernDataGridHeaderStyle}"/>
             <Setter Property="HorizontalGridLinesBrush" Value="#DDDDDD"/>
             <Setter Property="VerticalGridLinesBrush" Value="#DDDDDD"/>
-            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="RowHeight" Value="45"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Foreground" Value="#2C3E50"/>
-            <Setter Property="BorderBrush" Value="#DDD"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="20"/>
-            <Setter Property="AutoGenerateColumns" Value="True"/>
-            <Setter Property="CanUserAddRows" Value="False"/>
-            <Setter Property="CanUserDeleteRows" Value="False"/>
-            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="SelectionMode" Value="Single"/>
             <Setter Property="AlternatingRowBackground" Value="#F9F9F9"/>
-            <Setter Property="ColumnHeaderStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#34495E"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
+        
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+    <Setter Property="FontSize" Value="16"/>
+    <Setter Property="Padding" Value="15,10"/>
+    <Setter Property="Background" Value="#16A085"/>
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Margin" Value="10"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Style.Triggers>
+        <EventTrigger RoutedEvent="Button.MouseEnter">
+            <BeginStoryboard>
+                <Storyboard>
+                    <ColorAnimation To="#1ABC9C" Duration="0:0:0.3" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Button.MouseLeave">
+            <BeginStoryboard>
+                <Storyboard>
+                    <ColorAnimation To="#16A085" Duration="0:0:0.3" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Style.Triggers>
+</Style>
+
+<Style x:Key="LogoutButtonStyle" TargetType="Button">
+    <Setter Property="FontSize" Value="16"/>
+    <Setter Property="Padding" Value="15,10"/>
+    <Setter Property="Background" Value="#E74C3C"/>
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Margin" Value="10"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="Cursor" Value="Hand"/>
+</Style>
+
     </Window.Resources>
 
-    <!-- DockPanel este containerul principal -->
     <DockPanel>
-        <!-- Sidebar (stânga) -->
-        <StackPanel DockPanel.Dock="Left" Width="250" Background="#34495E" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10,10,0">
-            <Button Content="Dashboard" Height="50" Margin="0,10" Background="#16A085" Foreground="White" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{StaticResource ModernButtonStyle}"/>
-            <Button Content="Product Management" Height="50" Margin="0,10" Background="#16A085" Foreground="White" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{StaticResource ModernButtonStyle}"/>
-            <Button Content="Reports" Height="50" Margin="0,10" Background="#16A085" Foreground="White" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{StaticResource ModernButtonStyle}"/>
-            <Button Content="Settings" Height="50" Margin="0,10" Background="#16A085" Foreground="White" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{StaticResource ModernButtonStyle}"/>
-            <Button Content="Help" Height="50" Margin="0,10" Background="#16A085" Foreground="White" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{StaticResource ModernButtonStyle}"/>
-            <Button Content="Logout" Height="50" Margin="0,10" Background="#E74C3C" Foreground="White" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{StaticResource LogoutButtonStyle}"/>
+        <!-- Sidebar -->
+        <StackPanel DockPanel.Dock="Left" Width="250" Background="#34495E">
+            <StackPanel Margin="0,20">
+                <Button Content="🏠 Dashboard" Style="{StaticResource ModernButtonStyle}"/>
+                <Button Content="📋 Product Management" Style="{StaticResource ModernButtonStyle}"/>
+                <Button Content="📊 Reports" Style="{StaticResource ModernButtonStyle}"/>
+                <Button Content="⚙️ Settings" Style="{StaticResource ModernButtonStyle}"/>
+                <Button Content="❓ Help" Style="{StaticResource ModernButtonStyle}"/>
+                <Button Content="🚪 Logout" Style="{StaticResource LogoutButtonStyle}"/>
+            </StackPanel>
         </StackPanel>
 
-        <!-- Conținutul principal -->
-        <Grid DockPanel.Dock="Right" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <DataGrid ItemsSource="{Binding Products}" AutoGenerateColumns="True" Margin="20" Style="{StaticResource DataGridStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <!-- Main content -->
+        <Grid Background="#FFFFFF" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title -->
+            <TextBlock Text="Active Products" FontSize="24" FontWeight="Bold" Foreground="#2C3E50" Margin="10"/>
+
+            <!-- DataGrid -->
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Products}" AutoGenerateColumns="True" Style="{StaticResource ModernDataGridStyle}"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      Margin="10" CanUserAddRows="False" CanUserDeleteRows="False"/>
         </Grid>
     </DockPanel>
 </Window>
